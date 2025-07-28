@@ -312,4 +312,20 @@ with tabs[2]:
     st.dataframe(df_sector.set_index("Sector"), use_container_width=True)
     st.bar_chart(df_sector.set_index("Sector")[["Avg ESG", "Avg Env", "Avg Soc", "Avg Gov"]])
 
+import numpy as np
+
+# --- Insert inside the app below st.title() or in the NIFTY50 Companies tab ---
+
+st.subheader("Nifty 50: Average ESG Scores (Current Year)")
+df_all = pd.DataFrame([
+    {
+        "Environmental": c["environmental"]["score"],
+        "Social": c["social"]["score"],
+        "Governance": c["governance"]["score"]
+    }
+    for c in st.session_state.companies if c["isNifty50"]
+])
+avg_scores = df_all.mean()
+st.bar_chart(avg_scores)
+
 st.caption("© NIFTY 50 ESG Dashboard, Streamlit version.")    
