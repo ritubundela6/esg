@@ -385,24 +385,6 @@ import altair as alt
 # -- Multi-company ESG trend line chart
 st.subheader("ESG Score Trend Lines (All Listed Companies, 2019–2023)")
 
-chart = alt.Chart(df).mark_line(point=True).encode(
-    x=alt.X('Year:O', title='Year'),
-    y=alt.Y('ESG Score:Q', title='ESG Score', scale=alt.Scale(domain=[df['ESG Score'].min() - 5, df['ESG Score'].max() + 5])),
-    color=alt.Color('Company:N', legend=alt.Legend(title="Company")),
-    tooltip=['Company', 'Year', 'ESG Score']
-).properties(width=800, height=450)
-
-st.altair_chart(chart, use_container_width=True)
-
-# (Optional) Add overall index average as a thicker black trend line
-avg_df = df.groupby('Year', as_index=False)['ESG Score'].mean()
-avg_chart = alt.Chart(avg_df).mark_line(color='black', strokeDash=[5,5], size=3).encode(
-    x='Year:O',
-    y='ESG Score:Q',
-    tooltip=['Year', 'ESG Score']
-)
-st.altair_chart(chart + avg_chart, use_container_width=True)
-
 years = [2019, 2020, 2021, 2022, 2023]
 historical_avg_esg = [72, 74, 76, 78, 81]  # Example; update with real data if available
 df_trend = pd.DataFrame({'Year': years, 'Average ESG Score': historical_avg_esg})
