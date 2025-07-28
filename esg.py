@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import io
-import seaborn as sns
 import matplotlib.pyplot as plt
 
 # --- Load Nifty Fifty data from CSV string (paste your full CSV here) ---
