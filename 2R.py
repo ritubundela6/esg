@@ -328,4 +328,57 @@ df_all = pd.DataFrame([
 avg_scores = df_all.mean()
 st.bar_chart(avg_scores)
 
+import altair as alt
+
+df_esg = pd.DataFrame([
+    {"Company": c["name"],
+     "Sector": c["sector"],
+     "Overall ESG": c["overallScore"]}
+    for c in st.session_state.companies if c["isNifty50"]
+])
+chart = alt.Chart(df_esg).mark_circle(size=80).encode(
+    x='Sector',
+    y='Overall ESG',
+    color='Sector',
+    tooltip=['Company', 'Overall ESG']
+).properties(width=700,height=400)
+st.altair_chart(chart, use_container_width=True)
+
+df_long = pd.melt(df_all, var_name='Factor', value_name='Score')
+chart2 = alt.Chart(df_long).mark_boxplot().encode(
+    x='Factor',
+    y='Score',
+    color='Factor'
+).properties(width=600)
+st.altair_chart(chart2, use_container_width=True)
+
+df_top10 = pd.DataFrame([
+    {"Company": c["name"],
+     "ESG Score": c["overallScore"]}
+    for c in st.session_state.companies if c["isNifty50"]
+]).sort_values("ESG Score", ascending=False).head(10)
+st.subheader("Top 10 Nifty 50 Companies: ESG Score")
+st.bar_chart(df_top10.set_index("Company"))
+
+df_stack = pd.DataFrame([
+    {
+        "Company": c["name"],
+        "Environmental": c["environmental"]["score"],
+        "Social": c["social"]["score"],
+        "Governance": c["governance"]["score"]
+    }
+    for c in st.session_state.companies if c["isNifty50"]
+]).head(10)  # Top 10 for clarity
+df_stack = df_stack.set_index("Company")
+st.subheader("ESG Component Distribution (Top 10 Companies)")
+st.bar_chart(df_stack)
+
+# Simulate historical ESG scores for demo purposes
+years = [2019, 2020, 2021, 2022, 2023]
+historical_avg_esg = [72, 74, 76, 78, 81]  # Example; update with real data if available
+df_trend = pd.DataFrame({'Year': years, 'Average ESG Score': historical_avg_esg})
+
+st.subheader("Nifty 50: ESG Score Trend (Last 5 Years)")
+st.line_chart(df_trend.set_index('Year'))
+
 st.caption("© NIFTY 50 ESG Dashboard, Streamlit version.")    
