@@ -7,19 +7,22 @@ import io
   
 # Assume the full "nift-50.csv" content is represented here as a string.  
 # Replace this placeholder with the actual CSV text or path.  
-nifty_csv = """  
-Symbol,company,Sector,Industry,Description,esg_risk_score_2024,predicted_future_esg_score,esg_risk_exposure,esg_risk_management,esg_risk_level,Material ESG Issues 1,Material ESG Issues 2,Material ESG Issues 3,,Controversy Level,controversy_score  
-ADANIENT,Adani Enterprises Ltd.,Energy,Metals & Mining,"...",32.9,33.23703095,Medium,Average,Medium,Business Ethics,Carbon,Human Capital,,High Controversy Level,4  
-ADANIPORTS,Adani Ports and Special Economic Zone Ltd.,Industrials,Services,"...",12.6,14.823,Low,Strong,Low,Occupational Health & Safety,Land Use & Biodiversity,Community Relations,,High Controversy Level,4  
-# Add the complete CSV content here...  
-"""  
-  
-# Simulate loading the CSV data by reading a file or using a string  
-try:  
-    nifty_fifty_data = pd.read_csv("D:\\gt internship\\week 6\\nift 50.csv")  
-except Exception as e:  
-    st.error(f"Error loading Nifty Fifty CSV data: {e}")  
-    nifty_fifty_data = pd.DataFrame()  
+st.title("Season ESG Analysis")
+
+st.title("📊 Data Uploader & Trend Analysis")
+
+# Step 1: Let the user upload a CSV or Excel file
+uploaded_file = st.file_uploader("Upload your data file (CSV or Excel)", type=["csv", "xlsx"])
+
+if uploaded_file is not None:
+    # Step 2: Read the data with pandas
+    if uploaded_file.name.endswith('.csv'):
+        df = pd.read_csv(uploaded_file)
+    else:
+        df = pd.read_excel(uploaded_file)
+    st.subheader("Preview of Uploaded Data")
+    st.write(df.head())
+
   
 # Map esg_risk_level to corresponding colors for styling purposes  
 risk_color_map = {'Low': 'lightgreen', 'Medium': 'khaki', 'High': 'salmon', 'Severe': 'red'}  
