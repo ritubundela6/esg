@@ -177,7 +177,7 @@ def get_score_color(score):
 # ----------------------------
 
 st.set_page_config(page_title="NIFTY50 ESG Dashboard", layout="wide")
-st.title("NIFTY 50 ESG Analysis & Comparison Tool")
+st.title("ESG Analysis & Comparison Tool")
 
 if 'companies' not in st.session_state:
     st.session_state.companies = nifty50_data.copy()
@@ -416,8 +416,7 @@ st.line_chart(df_trend.set_index('Year'))
 # ---------------------------------------------------------------
 with tabs[3]:
     st.header("Data & Trend Analysis")
-import streamlit as st
-import pandas as pd
+
 import matplotlib.pyplot as plt
 
 st.title("📊 Data Uploader & Trend Analysis")
