@@ -403,7 +403,6 @@ avg_chart = alt.Chart(avg_df).mark_line(color='black', strokeDash=[5,5], size=3)
 )
 st.altair_chart(chart + avg_chart, use_container_width=True)
 
- Simulate historical ESG scores for demo purposes
 years = [2019, 2020, 2021, 2022, 2023]
 historical_avg_esg = [72, 74, 76, 78, 81]  # Example; update with real data if available
 df_trend = pd.DataFrame({'Year': years, 'Average ESG Score': historical_avg_esg})
