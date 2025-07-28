@@ -410,7 +410,7 @@ df_trend = pd.DataFrame({'Year': years, 'Average ESG Score': historical_avg_esg}
 st.subheader("Nifty 50: ESG Score Trend (Last 5 Years)")
 st.line_chart(df_trend.set_index('Year'))
 
--------------------------------------------------------------------------------------------------------------
+
 # ---------------------------------------------------------------
 # Tab 3: Sector-level Analytics (Averages by Sector)
 # ---------------------------------------------------------------
