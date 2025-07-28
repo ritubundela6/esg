@@ -21,7 +21,7 @@ ADANIPORTS,Adani Ports and Special Economic Zone Ltd.,Industrials,Services,"..."
 # we simulate loading by reading a sample minimal CSV (replace this with your full CSV):
 # Convert string CSV to DataFrame
 try:
-    nifty_fifty_data = pd.read_csv(io.StringIO(nifty_csv))
+    nifty_fifty_data = pd.read_csv(""D:\gt internship\week 6\nift 50.csv")
 except Exception as e:
     st.error(f"Failed to load Nifty Fifty CSV data: {e}")
     nifty_fifty_data = pd.DataFrame()
