@@ -301,6 +301,23 @@ with tabs[1]:
                 st.dataframe(df_cmp.sort_values("Overall ESG", ascending=False), use_container_width=True)
                 st.bar_chart(df_cmp.set_index("Company")[["Env", "Soc", "Gov", "Overall ESG"]])
 
+import altair as alt
+
+# Prepare data in 'long' format for Altair (if not already imported above)
+df_long = df_cmp.melt(id_vars=['Company', 'Sector'], 
+                      value_vars=['Env', 'Soc', 'Gov', 'Overall ESG'],
+                      var_name='Factor', value_name='Score')
+
+chart = alt.Chart(df_long).mark_bar().encode(
+    x=alt.X('Company:N', title='Company', axis=alt.Axis(labelAngle=-45)),
+    y=alt.Y('Score:Q', title='Score'),
+    color='Factor:N',
+    column=alt.Column('Factor:N', header=alt.Header(labelOrient="bottom", title=None)),
+    tooltip=['Company', 'Sector', 'Factor', 'Score']
+).properties(height=300).interactive()
+
+st.altair_chart(chart, use_container_width=True)
+
 # ---------------------------------------------------------------
 # Tab 3: Sector-level Analytics (Averages by Sector)
 # ---------------------------------------------------------------
