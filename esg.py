@@ -1,31 +1,29 @@
-import streamlit as st
-import pandas as pd
-import numpy as np
-import io
-import matplotlib.pyplot as plt
-
-# --- Load Nifty Fifty data from CSV string (paste your full CSV here) ---
-
-# For brevity, this example assumes the "nift-50.csv" content you uploaded is assigned here as string
-# You should paste your exact CSV text here (full content you provided)
-nifty_csv = """
-Symbol,company,Sector,Industry,Description,esg_risk_score_2024,predicted_future_esg_score,esg_risk_exposure,esg_risk_management,esg_risk_level,Material ESG Issues 1,Material ESG Issues 2,Material ESG Issues 3,,Controversy Level,controversy_score
-ADANIENT,Adani Enterprises Ltd.,Energy,Metals & Mining,"...",32.9,33.23703095,Medium,Average,Medium,Business Ethics,Carbon,Human Capital,,High Controversy Level,4
-ADANIPORTS,Adani Ports and Special Economic Zone Ltd.,Industrials,Services,"...",12.6,14.823,Low,Strong,Low,Occupational Health & Safety,Land Use & Biodiversity,Community Relations,,High Controversy Level,4
-# ... add the entire CSV content here ...
-"""
-
-# To keep the example running without the whole huge CSV pasted again,
-# we simulate loading by reading a sample minimal CSV (replace this with your full CSV):
-# Convert string CSV to DataFrame
-try:
-    nifty_fifty_data = pd.read_csv("D:\gt internship\week 6\nift 50.csv")
-except Exception as e:
-    st.error(f"Failed to load Nifty Fifty CSV data: {e}")
-    nifty_fifty_data = pd.DataFrame()
-
-# Map esg_risk_level to colors for styling
-risk_color_map = {'Low': 'lightgreen', 'Medium': 'khaki', 'High': 'salmon', 'Severe': 'red'}
+import streamlit as st  
+import pandas as pd  
+import numpy as np  
+import io  
+import matplotlib.pyplot as plt  
+  
+# --- Load Nifty Fifty data from CSV string ---  
+  
+# Assume the full "nift-50.csv" content is represented here as a string.  
+# Replace this placeholder with the actual CSV text or path.  
+nifty_csv = """  
+Symbol,company,Sector,Industry,Description,esg_risk_score_2024,predicted_future_esg_score,esg_risk_exposure,esg_risk_management,esg_risk_level,Material ESG Issues 1,Material ESG Issues 2,Material ESG Issues 3,,Controversy Level,controversy_score  
+ADANIENT,Adani Enterprises Ltd.,Energy,Metals & Mining,"...",32.9,33.23703095,Medium,Average,Medium,Business Ethics,Carbon,Human Capital,,High Controversy Level,4  
+ADANIPORTS,Adani Ports and Special Economic Zone Ltd.,Industrials,Services,"...",12.6,14.823,Low,Strong,Low,Occupational Health & Safety,Land Use & Biodiversity,Community Relations,,High Controversy Level,4  
+# Add the complete CSV content here...  
+"""  
+  
+# Simulate loading the CSV data by reading a file or using a string  
+try:  
+    nifty_fifty_data = pd.read_csv("D:\\gt internship\\week 6\\nift 50.csv")  
+except Exception as e:  
+    st.error(f"Error loading Nifty Fifty CSV data: {e}")  
+    nifty_fifty_data = pd.DataFrame()  
+  
+# Map esg_risk_level to corresponding colors for styling purposes  
+risk_color_map = {'Low': 'lightgreen', 'Medium': 'khaki', 'High': 'salmon', 'Severe': 'red'}  
 
 def color_risk_level(val):
     return f'background-color: {risk_color_map.get(val, "")}'
