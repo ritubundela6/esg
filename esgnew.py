@@ -355,7 +355,7 @@ with tabs[3]:
         st.subheader("Preview of Uploaded Data")
         st.write(df_upload.head())
 
-       st.subheader("Select columns for Trend Analysis")
+      
 
 all_columns = df_upload.columns.tolist()
 x_col = st.selectbox(
