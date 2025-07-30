@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import altair as alt
-import matplotlib.pyplot as plt
+import matplotlib as plt
 
 # ----------------------------
 # 1. Define Sample Data (NIFTY 50, mock scores)
