@@ -355,17 +355,29 @@ with tabs[3]:
         st.subheader("Preview of Uploaded Data")
         st.write(df_upload.head())
 
-        st.subheader("Select columns for Trend Analysis")
-        all_columns = df_upload.columns.tolist()
-        x_col = st.selectbox("Select X-axis column (usually date/time or index)", all_columns)
-        y_col = st.selectbox("Select Y-axis column (numeric)", all_columns)
-        st.subheader(f"Trend Line: {y_col} over {x_col}")
-        fig, ax = st.subplots()
-        ax.plot(df_upload[x_col], df_upload[y_col], marker='o')
-        ax.set_xlabel(x_col)
-        ax.set_ylabel(y_col)
-        ax.set_title(f"{y_col} Trend over {x_col}")
-        st.pyplot(fig)
+       st.subheader("Select columns for Trend Analysis")
+
+all_columns = df_upload.columns.tolist()
+x_col = st.selectbox(
+    "Select X-axis column (usually date/time or index)", 
+    all_columns
+)
+y_col = st.selectbox(
+    "Select Y-axis column (numeric)", 
+    all_columns
+)
+
+st.subheader(f"Trend Line: {y_col} over {x_col}")
+
+# Create the plot with Matplotlib
+fig, ax = plt.subplots()
+ax.plot(df_upload[x_col], df_upload[y_col], marker='o', linestyle='-')
+ax.set_xlabel(x_col)
+ax.set_ylabel(y_col)
+ax.set_title(f"{y_col} Trend over {x_col}")
+
+# Display the plot in Streamlit
+st.pyplot(fig)
 
         st.subheader("Basic Statistics")
         st.write(df_upload[y_col].describe())
