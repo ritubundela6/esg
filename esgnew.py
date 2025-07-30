@@ -355,29 +355,49 @@ with tabs[3]:
         st.subheader("Preview of Uploaded Data")
         st.write(df_upload.head())
 
+        import streamlit as st
+        import matplotlib.pyplot as plt
+        import numpy as np
+
+        st.subheader("Select columns for Trend Analysis")
+        all_columns = df_upload.columns.tolist()
+        x_col = st.selectbox("Select X-axis column (usually date/time or index)", all_columns)
+        y_col = st.selectbox("Select Y-axis column (numeric)", all_columns)
+
+        st.subheader(f"Trend Line: {y_col} over {x_col}")
+
+        # Prepare data
+        x_data = df_upload[x_col]
+        y_data = df_upload[y_col]
+
+        # If x_col is a datetime, convert to ordinal for regression/trend line
+        if np.issubdtype(x_data.dtype, np.datetime64):
+            x_numeric = x_data.map(lambda x: x.toordinal())
+        else:
+            x_numeric = x_data
+
+         # Create plot
+        fig, ax = plt.subplots()
+
+        ax.plot(x_data, y_data, marker='o', label="Actual Data")
+
+        # Compute and plot trend line (linear fit)
+        if len(y_data) > 1:
+            z = np.polyfit(x_numeric, y_data, 1)
+            p = np.poly1d(z)
+            ax.plot(x_data, p(x_numeric), "r--", label="Trend Line")
+            ax.set_xlabel(x_col)
+            ax.set_ylabel(y_col)
+              
+            ax.set_title(f"{y_col} Trend over {x_col}")
+            ax.legend()
+
+            st.pyplot(fig)
+
+
       
 
-all_columns = df_upload.columns.tolist()
-x_col = st.selectbox(
-    "Select X-axis column (usually date/time or index)", 
-    all_columns
-)
-y_col = st.selectbox(
-    "Select Y-axis column (numeric)", 
-    all_columns
-)
 
-st.subheader(f"Trend Line: {y_col} over {x_col}")
-
-# Create the plot with Matplotlib
-fig, ax = plt.subplots()
-ax.plot(df_upload[x_col], df_upload[y_col], marker='o', linestyle='-')
-ax.set_xlabel(x_col)
-ax.set_ylabel(y_col)
-ax.set_title(f"{y_col} Trend over {x_col}")
-
-# Display the plot in Streamlit
-st.pyplot(fig)
 
         
         st.write(df_upload[y_col].describe())
