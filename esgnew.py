@@ -379,7 +379,7 @@ ax.set_title(f"{y_col} Trend over {x_col}")
 # Display the plot in Streamlit
 st.pyplot(fig)
 
-        st.subheader("Basic Statistics")
+        
         st.write(df_upload[y_col].describe())
         st.markdown("##### Automated Recommendation")
         mean_val = df_upload[y_col].mean()
