@@ -360,7 +360,7 @@ with tabs[3]:
         x_col = st.selectbox("Select X-axis column (usually date/time or index)", all_columns)
         y_col = st.selectbox("Select Y-axis column (numeric)", all_columns)
         st.subheader(f"Trend Line: {y_col} over {x_col}")
-        fig, ax = plt.subplots()
+        fig, ax = st.subplots()
         ax.plot(df_upload[x_col], df_upload[y_col], marker='o')
         ax.set_xlabel(x_col)
         ax.set_ylabel(y_col)
