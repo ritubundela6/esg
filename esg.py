@@ -12,14 +12,14 @@ st.set_page_config(
 # ----- HEADER & BRANDING -----
 col1, col2 = st.columns([0.1, 0.9])
 with col1:
-    st.image("https://your-logo-url.com/logo.png", width=70)  # Replace with your logo
+    st.image("🌱", width=70)  # Replace with your logo
 with col2:
     st.markdown(
         '<h1 style="color:#254441;font-family:sans-serif;">Season ESG Analysis</h1>',
         unsafe_allow_html=True
     )
     st.caption(
-        "Comprehensive and professional ESG insights for Indian companies and the Nifty 50 benchmark."
+        "Comprehensive and professional ESG insights for companies."
     )
 st.markdown("---")
 
@@ -98,6 +98,7 @@ with tab1:
         <b>Median ESG Score</b>: {nifty_data['ESG Score'].median()}<br>
         <b>Areas for Improvement</b>: {', '.join(nifty_data[nifty_data['ESG Score'] < 40]['Company'].tolist())}
     """, unsafe_allow_html=True)
+    
 
 # ---- TAB 2: Company Comparison ----
 with tab2:
