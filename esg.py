@@ -61,13 +61,13 @@ tabs = st.tabs(["Nifty Fifty ESG Overview", "Upload & Compare Company", "Custom 
 with tabs[0]:
     st.header("Nifty Fifty Companies ESG Analysis")
 
-    if df_exists_and_not_empty(nifty_fifty_data):
+    if df_exists_and_not_empty(df):
         st.info("Use the search box below to filter companies.")
 
         # Search/filter box for companies
         search_term = st.text_input("Search Company by Name", "")
 
-        filtered_df = nifty_fifty_data.copy()
+        filtered_df = df.copy()
 
         if search_term:
             filtered_df = filtered_df[filtered_df['company'].str.contains(search_term, case=False, na=False)]
