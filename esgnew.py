@@ -356,7 +356,6 @@ with tabs[3]:
         st.write(df_upload.head())
 
         import streamlit as st
-        import matplotlib.pyplot as plt
         import numpy as np
 
         st.subheader("Select columns for Trend Analysis")
