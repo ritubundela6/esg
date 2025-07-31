@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib as plt
 import altair as alt
 
 # ----------------------------
@@ -376,8 +375,6 @@ with tabs[3]:
             x_numeric = x_data
 
          # Create plot
-        fig, ax = plt.subplots()
-
         ax.plot(x_data, y_data, marker='o', label="Actual Data")
 
         # Compute and plot trend line (linear fit)
